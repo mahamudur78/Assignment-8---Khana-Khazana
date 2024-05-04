@@ -1,4 +1,5 @@
 "use server";
+import { replaceMongoIdInObject } from "@/utils/data-util";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -40,7 +41,10 @@ async function performLogin(formData) {
 async function addFavouriteRecipe(recipeId, authId, currentPath) {
     try {
         const updatefavouriteData = await updatefavourite(recipeId, authId);
-        return JSON.parse(JSON.stringify(updatefavouriteData));
+        // return JSON.parse(JSON.stringify(updatefavouriteData));
+        return replaceMongoIdInObject(
+            JSON.parse(JSON.stringify(updatefavouriteData))
+        );
     } catch (error) {
         throw error;
     }

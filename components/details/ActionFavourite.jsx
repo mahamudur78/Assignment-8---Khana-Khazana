@@ -18,17 +18,20 @@ export default function ActionFavourite({ recipeId }) {
     const toggleFavourited = async () => {
         if (auth) {
             const currentPath = window.location.pathname;
-            const FavouriteRecipe = addFavouriteRecipe(
+
+            const favouriteRecipe = await addFavouriteRecipe(
                 recipeId,
                 auth?.id,
                 currentPath
             );
 
-            console.log(FavouriteRecipe);
-
             const foundRecipe = auth.favourites.find(
                 (id) => id.toString() === recipeId
             );
+
+            // const foundRecipe = favouriteRecipe.favourites.find(
+            //     (id) => id.toString() === recipeId
+            // );
 
             if (!foundRecipe) {
                 setAuth({
@@ -46,7 +49,9 @@ export default function ActionFavourite({ recipeId }) {
                 });
             }
 
+            console.log(favouriteRecipe);
             console.log(auth);
+
             setFavourited(!favourited);
         } else {
             setFevPath(window.location.pathname);

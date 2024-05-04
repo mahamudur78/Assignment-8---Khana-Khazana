@@ -14,10 +14,8 @@ export default function LoginForm() {
         event.preventDefault();
 
         try {
-            setError(null);
             const formData = new FormData(event.currentTarget);
             const found = await performLogin(formData);
-            console.log(found);
 
             if (found) {
                 setAuth(found);

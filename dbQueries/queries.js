@@ -47,7 +47,7 @@ async function updatefavourite(recipeId, authId) {
         } else {
             user.favourites.push(new mongoose.Types.ObjectId(recipeId));
         }
-        await user.save();
+        user.save();
     }
 }
 

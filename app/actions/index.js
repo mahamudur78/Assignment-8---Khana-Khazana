@@ -1,5 +1,4 @@
 "use server";
-// import { revalidatePath } from 'next/cache'
 import { redirect } from "next/navigation";
 
 const {
@@ -25,11 +24,11 @@ async function registerUser(userData) {
     redirect("/login");
 }
 
-async function performLogin(fromData) {
+async function performLogin(formData) {
     try {
         const credential = {};
-        credential.email = fromData.get("email");
-        credential.password = fromData.get("password");
+        credential.email = formData.get("email");
+        credential.password = formData.get("password");
         const found = await fundUserByCredentials(credential);
         return found;
     } catch (error) {
@@ -37,13 +36,14 @@ async function performLogin(fromData) {
     }
 }
 
-async function addInterestedRecipe(recipeId, authId) {
+async function addFavouriteRecipe(recipeId, authId, currentPath) {
     try {
         await updatefavourite(recipeId, authId);
     } catch (error) {
         throw error;
     }
-    // revalidatePath("/");
+
+    // revalidatePath(currentPath);
 }
 
-export { addInterestedRecipe, getCategoryList, performLogin, registerUser };
+export { addFavouriteRecipe, getCategoryList, performLogin, registerUser };

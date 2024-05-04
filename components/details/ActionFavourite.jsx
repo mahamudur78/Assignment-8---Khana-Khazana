@@ -1,5 +1,5 @@
 "use client";
-import { addInterestedRecipe } from "@/app/actions";
+import { addFavouriteRecipe } from "@/app/actions";
 import { useAuth } from "@/app/hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -7,11 +7,9 @@ import { useState, useTransition } from "react";
 export default function ActionFavourite({ recipeId }) {
     const router = useRouter();
 
-    const { auth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const isFavourited = auth?.favourites.find((id) => id === recipeId);
-
-    console.log(isFavourited);
 
     const [favourited, setFavourited] = useState(isFavourited);
 
@@ -19,8 +17,30 @@ export default function ActionFavourite({ recipeId }) {
 
     const toggleFavourited = async () => {
         if (auth) {
-            addInterestedRecipe(recipeId, auth?.id);
+            const currentPath = window.location.pathname;
+            addFavouriteRecipe(recipeId, auth?.id, currentPath);
 
+            const foundRecipe = auth.favourites.find(
+                (id) => id.toString() === recipeId
+            );
+
+            if (!foundRecipe) {
+                setAuth({
+                    ...auth,
+                    favourites: [...auth.favourites, recipeId],
+                });
+            } else {
+                const unFavourited = auth.favourites.filter(
+                    (id) => id.toString() !== recipeId
+                );
+
+                setAuth({
+                    ...auth,
+                    favourites: [...unFavourited],
+                });
+            }
+
+            console.log(auth);
             setFavourited(!favourited);
         } else {
             router.push("/login");

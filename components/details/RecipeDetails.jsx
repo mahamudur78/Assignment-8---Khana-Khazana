@@ -26,7 +26,11 @@ export default async function RecipeDetails({ recipe }) {
                         {recipe?.name}
                     </h2>
                     <p className='text-xs text-[#eb4a36] italic my-2'>
-                        <Link href={`/category/${recipe?.category}`}>
+                        <Link
+                            href={`/category/${encodeURIComponent(
+                                recipe?.category
+                            )}`}
+                        >
                             {recipe?.category}
                         </Link>
                     </p>

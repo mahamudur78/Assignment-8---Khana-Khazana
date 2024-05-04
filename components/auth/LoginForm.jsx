@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function LoginForm() {
     const [error, setError] = useState();
-    const { setAuth } = useAuth();
+    const { setAuth, fevPath } = useAuth();
     const router = useRouter();
 
     async function onSubmit(event) {
@@ -19,7 +19,7 @@ export default function LoginForm() {
 
             if (found) {
                 setAuth(found);
-                router.push("/");
+                router.push(fevPath ? fevPath : "/");
             } else {
                 setError("Please provide a valid credential!");
             }

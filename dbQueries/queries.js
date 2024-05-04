@@ -21,6 +21,11 @@ async function getRecipeByCategory(categoryName) {
     return replaceMongoIdInArray(recipe);
 }
 
+async function getRecipeByAuthor(authorName) {
+    const recipe = await recipesModel.find({ author: authorName }).lean();
+    return replaceMongoIdInArray(recipe);
+}
+
 async function createUser(user) {
     return await userModel.create(user);
 }
@@ -55,6 +60,7 @@ export {
     createUser,
     fundUserByCredentials,
     getAllRecipe,
+    getRecipeByAuthor,
     getRecipeByCategory,
     getRecipeById,
     updatefavourite,

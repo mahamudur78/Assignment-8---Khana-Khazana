@@ -30,7 +30,7 @@ async function performLogin(formData) {
         credential.email = formData.get("email");
         credential.password = formData.get("password");
         const found = await fundUserByCredentials(credential);
-        return found;
+        return JSON.parse(JSON.stringify(found));
     } catch (error) {
         throw error;
     }

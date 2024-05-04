@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import { mongoDBConnect } from "@/dbConnect/mongo";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./providers/AuthProvider";
@@ -15,7 +14,6 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-    await mongoDBConnect();
     return (
         <html lang='en'>
             <body className={inter.className}>

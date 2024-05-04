@@ -18,7 +18,13 @@ export default function ActionFavourite({ recipeId }) {
     const toggleFavourited = async () => {
         if (auth) {
             const currentPath = window.location.pathname;
-            addFavouriteRecipe(recipeId, auth?.id, currentPath);
+            const FavouriteRecipe = addFavouriteRecipe(
+                recipeId,
+                auth?.id,
+                currentPath
+            );
+
+            console.log(FavouriteRecipe);
 
             const foundRecipe = auth.favourites.find(
                 (id) => id.toString() === recipeId

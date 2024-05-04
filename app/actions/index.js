@@ -1,4 +1,5 @@
 "use server";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const {
@@ -38,12 +39,13 @@ async function performLogin(formData) {
 
 async function addFavouriteRecipe(recipeId, authId, currentPath) {
     try {
-        await updatefavourite(recipeId, authId);
+        const updatefavouriteData = await updatefavourite(recipeId, authId);
+        return JSON.parse(JSON.stringify(updatefavouriteData));
     } catch (error) {
         throw error;
     }
 
-    // revalidatePath(currentPath);
+    revalidatePath(currentPath);
 }
 
 export { addFavouriteRecipe, getCategoryList, performLogin, registerUser };

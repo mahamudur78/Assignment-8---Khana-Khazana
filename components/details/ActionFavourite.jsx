@@ -49,9 +49,6 @@ export default function ActionFavourite({ recipeId }) {
                 });
             }
 
-            console.log(favouriteRecipe);
-            console.log(auth);
-
             setFavourited(!favourited);
         } else {
             setFevPath(window.location.pathname);

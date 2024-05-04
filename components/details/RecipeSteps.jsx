@@ -1,5 +1,4 @@
 export default function RecipeSteps({ recipeSteps }) {
-    // console.log(recipeSteps);
     return (
         <section>
             <div className='container py-12'>

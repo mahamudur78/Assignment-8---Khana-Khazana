@@ -14,8 +14,6 @@ export default function SocialShare({ title }) {
         setCurrentUrl(window.location.href);
     }, []);
 
-    console.log(currentUrl);
-
     return (
         <>
             <button

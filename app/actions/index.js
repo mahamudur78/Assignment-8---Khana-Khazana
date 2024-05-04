@@ -22,7 +22,6 @@ async function getCategoryList() {
 async function registerUser(userData) {
     const user = Object.fromEntries(userData);
     const created = await createUser(user);
-    console.log("sdfsd", user, created);
     redirect("/login");
 }
 
